@@ -8,8 +8,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// These are the new imports we're adding:
+var passport = require('passport');
+var StormpathStrategy = require('passport-stormpath');
+var session = require('express-session');
+var flash = require('connect-flash');
+
+
+var index_routes = require('./routes/index');
+var auth_routes = require('./routes/auth');
+
+
+
 
 
 
@@ -35,6 +45,8 @@ var SampleApp = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+        self.express_secret = process.env.EXPRESS_SECRET || Hha8Ayro3HoQ;
+
 
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
@@ -88,8 +100,14 @@ var SampleApp = function() {
      *  Initialize the server (express)
      */
     self.initializeServer = function() {
-        //self.createRoutes();
+       
         self.app = express();
+
+        // Here is what we're adding:
+var strategy = new StormpathStrategy();
+passport.use(strategy);
+passport.serializeUser(strategy.serializeUser);
+passport.deserializeUser(strategy.deserializeUser);
 
 self.app.use(function (req, res, next) {
         if (req.headers['x-forwarded-proto'] == 'http') {
@@ -109,10 +127,27 @@ self.app.use(bodyParser.urlencoded());
 self.app.use(cookieParser());
 self.app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 self.app.use(express.static(path.join(__dirname, 'public')));
+
+// Stuff we're adding:
+self.app.use(session({
+  secret: self.express_secret,
+  key: 'sid',
+  cookie: {secure: false},
+  saveUninitialized: true,
+  resave: true
+}));
+self.app.use(passport.initialize());
+self.app.use(passport.session());
+self.app.use(flash());
+
+
+
 self.app.set('views', path.join(__dirname, 'views'));
 
-self.app.use('/', routes);
-self.app.use('/users', users);
+
+
+self.app.use('/', auth_routes);
+self.app.use('/', index_routes);
 
 
 
