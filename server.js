@@ -1,7 +1,18 @@
 #!/bin/env node
 //  OpenShift sample Node application
+
 var express = require('express');
-var fs      = require('fs');
+var path = require('path');
+var favicon = require('static-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+
+
+
 
 
 /**
@@ -30,30 +41,11 @@ var SampleApp = function() {
             //  allows us to run/test the app locally.
             console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
-        };
-    };
-
-
-    /**
-     *  Populate the cache.
-     */
-    self.populateCache = function() {
-        if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
         }
-
-        //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
     };
 
 
-    /**
-     *  Retrieve entry (content) from cache.
-     *  @param {string} key  Key identifying content to retrieve from cache.
-     */
-    self.cache_get = function(key) { return self.zcache[key]; };
-
-
+    
     /**
      *  terminator === the termination handler
      *  Terminate server on receipt of the specified signal.
@@ -84,50 +76,52 @@ var SampleApp = function() {
         });
     };
 
-    function redirectSec  (req, res, next) {
-        if (req.headers['x-forwarded-proto'] == 'http') { 
-            res.redirect('https://' + req.headers.host + req.path);
-        } else {
-            return next();
-        }
-    }
-
+    
 
     /*  ================================================================  */
     /*  App server functions (main app logic here).                       */
     /*  ================================================================  */
 
-    /**
-     *  Create the routing table entries + handlers for the application.
-     */
-    self.createRoutes = function() {
-        self.routes = { };
-
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
-        };
-    };
-
+    
 
     /**
-     *  Initialize the server (express) and create the routes and register
-     *  the handlers.
+     *  Initialize the server (express)
      */
     self.initializeServer = function() {
-        self.createRoutes();
-        self.app = express.createServer();
+        //self.createRoutes();
+        self.app = express();
 
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, redirectSec, self.routes[r]);
+self.app.use(function (req, res, next) {
+        if (req.headers['x-forwarded-proto'] == 'http') {
+            console.log("Hello World");
+            res.redirect('https://' + req.headers.host + req.path);
+        } else {
+            return next();
         }
-    };
+});
+
+self.app.set('view engine', 'jade');
+
+self.app.use(favicon());
+self.app.use(logger('dev'));
+self.app.use(bodyParser.json());
+self.app.use(bodyParser.urlencoded());
+self.app.use(cookieParser());
+self.app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+self.app.use(express.static(path.join(__dirname, 'public')));
+self.app.set('views', path.join(__dirname, 'views'));
+
+self.app.use('/', routes);
+self.app.use('/users', users);
+
+
+
+
+ };
+
+
+
+   
 
 
     /**
@@ -135,7 +129,7 @@ var SampleApp = function() {
      */
     self.initialize = function() {
         self.setupVariables();
-        self.populateCache();
+        
         self.setupTerminationHandlers();
 
         // Create the express server and routes.
@@ -164,4 +158,3 @@ var SampleApp = function() {
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
-

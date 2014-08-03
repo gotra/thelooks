@@ -9,9 +9,9 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Rajeev Guru",
+    "email": "guru.rajeev@gmail.com",
+    "url": "http://www.thegurucompany.be./"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
@@ -25,7 +25,15 @@
   },
 
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~4.2.0",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "jade": "~1.3.0",
+    "stylus": "0.42.3"
+
   },
   "devDependencies": {},
   "bundleDependencies": [],
