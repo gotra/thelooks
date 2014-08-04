@@ -15,8 +15,14 @@ router.post('/register', function(req, res) {
 
   var username = req.body.username;
   var password = req.body.password;
+  var firstname = req.body.firstname
+  var lastname = req.body.lastname
 
   // Grab user fields.
+  if (!firstname || !lastname) {
+    return res.render('register', {title: 'Register', error: 'Firstname and lastname required.'});
+  }
+
   if (!username || !password) {
     return res.render('register', {title: 'Register', error: 'Email and password required.'});
   }
@@ -33,8 +39,8 @@ router.post('/register', function(req, res) {
     if (err) throw err;
 
     app.createAccount({
-      givenName: 'John',
-      surname: 'Smith',
+      givenName: firstname,
+      surname: lastname,
       username: username,
       email: username,
       password: password,
