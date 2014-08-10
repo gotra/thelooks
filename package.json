@@ -31,7 +31,7 @@
     "debug": "~0.7.4",
     "jade": "~1.3.0",
     "stylus": "0.42.3",
-    "passport-stormpath": "~0.1.2",
+    "passport-stormpath": "https://github.com/gotra/passport-stormpath/tarball/develop",
     "connect-flash": "~0.1.1",
     "passport": "~0.2.0",
     "express-session": "~1.7.2",

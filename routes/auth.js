@@ -6,17 +6,38 @@ var stormpath = require('stormpath');
 
 // Render the registration page.
 router.get('/register', function(req, res) {
-  res.render('register', {title: 'Register', error: req.flash('error')[0]});
+  res.render('register', {title: 'Register',error: req.flash('error')[0]});
 });
 
+//Register a new  user via social login
+router.post('/socialsignup',function(req,res){
+
+  passport.authenticate('stormpath')(req, res, function () {
+          return res.redirect('/dashboard');
+  });
+
+});
 
 // Register a new user to Stormpath.
 router.post('/register', function(req, res) {
 
   var username = req.body.username;
   var password = req.body.password;
-  var firstname = req.body.firstname
-  var lastname = req.body.lastname
+  var fullname = req.body.fullname;
+  var firstname,lastname = '';
+  var nameRegex = /^([A-Za-z\u00C0-\u017F]*)\s(.*)/;
+
+  if (fullname) {
+
+    var match = nameRegex.exec(fullname);
+    if (match && match.length > 2) {
+      firstname = match[1];
+      lastname = match[2];
+    }
+   
+  }
+  
+
 
   // Grab user fields.
   if (!firstname || !lastname) {
