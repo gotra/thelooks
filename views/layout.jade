@@ -19,9 +19,8 @@ block content
             li: a(href="#") LOOKS BOX
           if user
             .navbar-right.navbar-form
-              ul.nav.navbar-nav
-                li: label.title-text Hi #{user.givenName}
-                li: a.btn.btn-danger.btn-sm(href="/logout") Logout
+              label.title-text Hi #{user.givenName}
+              a.btn.btn-danger.btn-sm(href="/logout") Logout
           else
             form.navbar-form.navbar-right(role="form" method="post" action="/login")
               .form-group
