@@ -5,15 +5,16 @@ body
 
 body
   font-family "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif
+  background-color #EDF0F5
 
 .body-with-navbar
   padding-top 50px
   padding-bottom 20px
 
-.text-vertical-center
+.text-vertical-bottom
   display table-cell
   text-align center
-  vertical-align middle
+  vertical-align bottom
   h1
     margin 0
     padding 0
@@ -60,11 +61,20 @@ hr
 
 
 .with-background
-  background url("../images/bg.png") no-repeat center center scroll
+  background url("../images/bg.jpg") no-repeat center center scroll
   -webkit-background-size cover
   -moz-background-size cover
   background-size cover
   -o-background-size cover
+
+.transparent-background
+  background: rgb(0, 0, 0) transparent;
+  background: rgba(0, 0, 0, 0.8);
+
+.transparent-background
+  p,
+  label
+    color:white;
 
 .header
   background-color #18bc9c
@@ -138,3 +148,10 @@ hr
 .btn-facebook.active
   background-color #0d2456 \9 !important
 
+.navbar
+  background-color #24ADBF
+
+.rounded-corners
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;

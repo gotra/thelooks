@@ -38,12 +38,16 @@
   function form_submit (provider,accessToken) {
     $('<form>', {
       "id": "sociallogin",
-      "html": '<input type="text" name="provider" value="' + provider + '"/><input type="text" name="accessToken" value="' + accessToken + '" />',
+      "html": '<input type="hidden" name="provider" value="' + provider + '"/><input type="hidden" name="accessToken" value="' + accessToken + '" />',
       "action": '/socialsignup',
       "method": 'post'
     }).appendTo(document.body).submit();
   
   }
+
+  String.prototype.toTitleCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
 
   
   // Load the SDK asynchronously

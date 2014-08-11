@@ -5,17 +5,18 @@ body {
 }
 body {
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #edf0f5;
 }
 .body-with-navbar {
   padding-top: 50px;
   padding-bottom: 20px;
 }
-.text-vertical-center {
+.text-vertical-bottom {
   display: table-cell;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: bottom;
 }
-.text-vertical-center h1 {
+.text-vertical-bottom h1 {
   margin: 0;
   padding: 0;
   font-size: 4.5em;
@@ -60,11 +61,19 @@ hr.small {
   text-align: right;
 }
 .with-background {
-  background: url("../images/bg.png") no-repeat center center scroll;
+  background: url("../images/bg.jpg") no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+}
+.transparent-background {
+  background: #000 transparent;
+  background: rgba(0,0,0,0.8);
+}
+.transparent-background p,
+.transparent-background label {
+  color: #fff;
 }
 .header {
   background-color: #18bc9c;
@@ -137,4 +146,12 @@ hr.small {
 .btn-facebook:active,
 .btn-facebook.active {
   background-color: #0d2456 9 !important;
+}
+.navbar {
+  background-color: #24adbf;
+}
+.rounded-corners {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }

@@ -5,8 +5,8 @@ block content
     .container
       .row
         .col-md-4.col-md-offset-4
-          .panel.panel-default
-            .panel-heading
+          .panel.panel-default.transparent-background
+            //.panel-heading
               h3.panel-title Sign Up!
             .panel-body
               input.btn.btn-lg.btn-facebook.btn-block(type='submit', value='Sign Up with Facebook' onclick="fb_login();")
@@ -19,13 +19,13 @@ block content
                 fieldset
                   .form-group
                     label.control-label(for='fullname') Full name
-                    input.form-control(name='fullname', type='text' data-bv-regexp-message="The full name can consist of alphabetical characters and spaces only" )
+                    input.form-control(name='fullname' id='fullname' type='text' required)
                   .form-group
                     label.control-label(for='username') Email
-                    input.form-control(name='username', type='email')
+                    input.form-control(name='username' id='username' type='email' required)
                   .form-group
                     label.control-label(for='password') Password
-                    input.form-control(name='password', type='password', value='')
+                    input.form-control(name='password', id='password' type='password', value='', required)
                  
                   input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign Up with Email')
                   br
@@ -35,11 +35,7 @@ block content
                       p.
                         #{error}
               
-                  .alert.alert-dismissable.alert-info
-                    button.close(data-dismiss='alert', type='button') &times;
-                    strong NOTE:&nbsp;
-                    Your password must be between 8 and 100 characters, and must
-                    contain lowercase letters, uppercase letters, and numbers.
+                  
 
 block scripts
   script.
@@ -52,6 +48,7 @@ block scripts
           },
           fields: {
             fullname: {
+                trigger: 'blur',
                 validators: {
                     regexp: {
                         regexp: /^([A-Za-z\u00C0-\u017F]*(\s))+[A-Za-z\u00C0-\u017F]*$/,
@@ -61,7 +58,28 @@ block scripts
                         message: 'Name is required'
                     }
                 }
+            },
+            username:{
+              trigger:'blur'
+            },
+            password:{
+              
+              validators: {
+                    regexp: {
+                        regexp: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,100}/,
+                        message: 'Your password must be between 8 and 100 characters, and must contain lowercase letters, uppercase letters, and numbers.'
+                    },
+                    notEmpty: {
+                        message: 'Password is required'
+                    }
+                }
             }
         }
       });
+
+      $('#fullname').on('blur',function(e){
+
+        this.value = this.value.toTitleCase();
+
+        });
     });  
