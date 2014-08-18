@@ -14,6 +14,7 @@ var passport = require('passport');
 var StormpathStrategy = require('passport-stormpath');
 var session = require('express-session');
 var flash = require('connect-flash');
+var mongoose = require('mongoose');
 
 
 var index_routes = require('./routes/index');
@@ -48,6 +49,21 @@ var SampleApp = function() {
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
         self.express_secret = process.env.EXPRESS_SECRET || Hha8Ayro3HoQ;
         self.tmpfolder = process.env.OPENSHIFT_DATA_DIR + '/tmp' || './tmp';
+
+        // default to a 'localhost' configuration:
+        self.mongo_connection_string = 'admin:'+ process.env.MONGO_PWD +'@127.0.0.1:27017/thelooks';
+
+        // if OPENSHIFT env variables are present, use the available connection info:
+        if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+          self.mongo_connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+          process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+          process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+          process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+          process.env.OPENSHIFT_APP_NAME;
+        }
+
+        
+        
 
 
         if (typeof self.ipaddress === "undefined") {
@@ -152,6 +168,9 @@ self.app.set('views', path.join(__dirname, 'views'));
 self.app.use('/', auth_routes);
 self.app.use('/', index_routes);
 
+//establish connection to mongoose
+console.log(self.mongo_connection_string);
+mongoose.connect('mongodb://' + self.mongo_connection_string);
 
 
 

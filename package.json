@@ -37,7 +37,8 @@
     "express-session": "~1.7.2",
     "stormpath": "~0.4.3",
     "cloudinary": "~1.0.11",
-    "multer": "~0.1.4"
+    "multer": "~0.1.4",
+    "mongoose": "~3.8.15"
   },
   "devDependencies": {},
   "bundleDependencies": [],
