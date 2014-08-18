@@ -1,0 +1,35 @@
+extends layout
+
+block body
+	.dashboard
+		.row
+			.col-lg-12
+				.jumbotron
+					h1 My looks
+					p Welcome to your look
+					form#my-awesome-dropzone.dropzone(action='/upload')
+block scripts
+	script.
+		$(function() {
+		// Now that the DOM is fully loaded, create the dropzone, and setup the
+		// event listeners
+			var myDropzone = new Dropzone("#my-awesome-dropzone");
+			var t1,t2;
+			myDropzone.on("sending", function(file,xhr,formData) {
+				console.log(file);
+				if (!t1) {
+					t1 = new Date().getTime();
+
+
+				}
+
+				formData.append("filesize", file.size); // Will send the filesize along with the file as POST data.
+			});
+
+			myDropzone.on("queuecomplete", function() {
+				
+					t2 = new Date().getTime();
+					
+					console.log((t2-t1)/1000);
+			});
+		})

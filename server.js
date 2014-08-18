@@ -7,6 +7,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  = require('multer');
 
 // These are the new imports we're adding:
 var passport = require('passport');
@@ -46,6 +47,7 @@ var SampleApp = function() {
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
         self.express_secret = process.env.EXPRESS_SECRET || Hha8Ayro3HoQ;
+        self.tmpfolder = process.env.OPENSHIFT_DATA_DIR/tmp || './tmp';
 
 
         if (typeof self.ipaddress === "undefined") {
@@ -139,6 +141,7 @@ self.app.use(session({
 self.app.use(passport.initialize());
 self.app.use(passport.session());
 self.app.use(flash());
+self.app.use(multer({ dest: self.tmpfolder}));
 
 
 
