@@ -1,0 +1,26 @@
+extends layout
+
+block body
+  .preview
+    form(enctype="multipart/form-data")!=cloudinary.uploader.image_upload_tag('image')
+
+
+    
+
+block scripts
+  !=cloudinary.cloudinary_js_config()
+  script.
+    // Configure Cloudinary
+    
+
+    $('.cloudinary-fileupload').bind('fileuploadstart', function(e){
+    $('.preview').html('Upload started...');
+    });
+
+    // Upload finished
+    $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data){
+    $('.preview').html(
+    $.cloudinary.image(data.result.public_id, { format: data.result.format, version: data.result.version, crop: 'scale', width: 100, height: 100 })
+    );
+    return true;
+    });

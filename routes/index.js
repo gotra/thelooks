@@ -6,6 +6,8 @@ var cloudinary = require('cloudinary');
 var fs = require('fs');
 var mongoose = require('mongoose');
 var ProUser = require('./../models/prouser');
+var crypto =  require('crypto');
+var querystring = require('querystring');
 
 cloudinary.config({
   cloud_name: 'www-thelooks-net',
@@ -43,9 +45,26 @@ router.get('/upload', function(req, res) {
 	res.render('uploaddropzone', {title: 'Uploads', user: req.user});
 });
 
+// Render the upload test  page
+router.get('/uploadjq', function(req, res) {
+  res.render('uploadjquery', {title: 'Uploads', user: req.user, cloudinary: cloudinary});
+});
+
+//send the signature
+router.get('/image/signature', function(req,res){
+  //var tobehashed = querystring.stringify({timesatmp=})
+  var _ts = Math.round(Date.now()/1000);
+  var _hash = querystring.stringify({timestamp: _ts + 'j5AiV3E8h6pwgEDxRzawjBRYr_o'});
+  var generator = crypto.createHash('sha1');
+  generator.update(_hash);
+  var _signature = generator.digest('hex');
+  res.json({"timestamp": _ts, "api_key": '726719321665415'  , "signature": _signature});
+});
+
+
 
 router.get('/pro/new', function(req,res) {
-  res.render('prouser', {title: 'Professional', user: req.user});
+  res.render('prouser', {title: 'Professional', user: req.user, prouser: new ProUser()});
 });
 
 router.route('/prouser')
@@ -77,10 +96,40 @@ router.route('/prouser')
       }
       res.json({ message: prouser.id } );
     });
+})
+.get(function (req,res){
+  ProUser.find(function(err,prousers){
+    if (err) {
+      console.log(err);
+      req.flash('error',err);
+      res.redirect('/error');
+     
+    }
+    else {
+       res.render('prouserlist', {title: 'Professional', user: req.user, prouserlist: prousers});
+    }
+      
+
+  });
 });
 
 
+router.route('/prouser/:prouserid')
+.get(function(req,res){
+  ProUser.findById(req.params.prouserid,function(err,prouser){
+    if (err) {
+       console.log(err);
+      req.flash('error',{status:'err.name',stack:err.message});
+      res.redirect('/error');
+    }
+    else {
+       console.log(prouser);
+      res.render('prouser',{title: 'Professional', user: req.user, prouser: prouser});
+    }
+      
+  });
 
+});
 
 
 router.post('/upload', function(req,res) {
@@ -93,7 +142,11 @@ router.post('/upload', function(req,res) {
 
 });
 
+router.get('/error',function(req,res){
 
+  res.render('error', { messages: req.flash('error') });
+
+});
 
 
 module.exports = router;

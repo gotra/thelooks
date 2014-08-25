@@ -10,10 +10,18 @@ block body
 					form#my-awesome-dropzone.dropzone(action='/upload')
 block scripts
 	script.
+		Dropzone.autoDiscover = false;
+		var cloudinarySignature; 
+		$.getJSON( "image/signature", function( data ) {
+			cloudinarySignature = data ;
+			});
 		$(function() {
 		// Now that the DOM is fully loaded, create the dropzone, and setup the
 		// event listeners
-			var myDropzone = new Dropzone("#my-awesome-dropzone");
+		//https://api.cloudinary.com/v1_1/www-thelooks-net/auto/upload
+			var myDropzone = new Dropzone("#my-awesome-dropzone",{
+				url: 'https://api.cloudinary.com/v1_1/www-thelooks-net/image/upload'
+				});
 			var t1,t2;
 			myDropzone.on("sending", function(file,xhr,formData) {
 				console.log(file);
@@ -23,7 +31,9 @@ block scripts
 
 				}
 
-				formData.append("filesize", file.size); // Will send the filesize along with the file as POST data.
+				formData.append("timestamp", cloudinarySignature.timestamp); // Will send the filesize along with the file as POST data.
+				formData.append("api_key", cloudinarySignature.api_key);
+				formData.append("signature", cloudinarySignature.signature);
 			});
 
 			myDropzone.on("queuecomplete", function() {

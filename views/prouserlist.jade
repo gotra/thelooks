@@ -1,0 +1,19 @@
+extends layout
+
+block body
+	.container
+		table.table
+			thead
+				tr
+					th Name
+					th Website
+					th Address
+			tbody
+			each item in prouserlist
+				tr 
+					td: a(href="/prouser/#{item.id}") #{item.firstName} #{item.lastName}
+					td #{item.website}
+					td #{item.address.line1} #{item.address.line2} #{item.address.zipcode} 	#{item.address.city}
+					
+
+

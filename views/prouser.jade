@@ -4,15 +4,21 @@ block body
 	.container
 		.row
 			.col-lg-6
-					h1 Add a hairdresser
+					h1 Add a prouser
+					a.profilePicContainer
+						img.profilePic
+					.profilePicSelector
+						a.picSelectorLink
+							i.fa.fa-camera.fa-2x
+
 					form(accept-charset='UTF-8', role='form', method='post', action='/prouser')
 						fieldset
 							.form-group
 							label.control-label(for='fullname') Full name
-							input.form-control(name='fullname' id='fullname' type='text' required)
+							input.form-control(name='fullname' id='fullname' type='text' required value="#{prouser.firstName ? prouser.firstName:''}#{prouser.lastName ? ' ' + prouser.lastName:''}")
 						.form-group
 							label.control-label(for='email') Email
-							input.form-control(name='email' id='email' type='email' required)
+							input.form-control(name='email' id='email' type='email' required value= prouser.emailId)
 						.form-group
 							label.control-label(for='website') Website
 							input.form-control(name='website', id='website' type='website', value='', required)

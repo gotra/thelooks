@@ -46,7 +46,7 @@ var SampleApp = function() {
     self.setupVariables = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8081;
         self.express_secret = process.env.EXPRESS_SECRET || Hha8Ayro3HoQ;
         self.tmpfolder = process.env.OPENSHIFT_DATA_DIR + '/tmp' || './tmp';
 
