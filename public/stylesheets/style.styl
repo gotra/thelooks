@@ -5,7 +5,7 @@ body
 
 body
   font-family "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif
-  background-color #EDF0F5
+  background-color #edf0f5
 
 .body-with-navbar
   padding-top 50px
@@ -13,7 +13,7 @@ body
 
 .text-vertical-bottom
   display table-cell
-  text-align center
+  text-align left
   vertical-align bottom
   h1
     margin 0
@@ -59,22 +59,20 @@ hr
     display table-header-group
     text-align right
 
-
 .with-background
-  background url("../images/bg.jpg") no-repeat center center scroll
+  background url("../images/bg_new.jpg") no-repeat center center scroll
   -webkit-background-size cover
   -moz-background-size cover
   background-size cover
   -o-background-size cover
 
 .transparent-background
-  background: rgb(0, 0, 0) transparent;
-  background: rgba(0, 0, 0, 0.8);
+  background #000 transparent
+  background rgba(0,0,0,0.65)
 
-.transparent-background
-  p,
-  label
-    color:white;
+.transparent-background p,
+.transparent-background label
+  color #fff
 
 .header
   background-color #18bc9c
@@ -119,9 +117,9 @@ hr
   background-color #fff
 
 .btn-facebook
-  color #ffffff
-  -webkit-text-shadow 0 -1px 0 rgba(0, 0, 0, 0.25)
-  text-shadow 0 -1px 0 rgba(0, 0, 0, 0.25)
+  color #fff
+  -webkit-text-shadow 0 -1px 0 rgba(0,0,0,0.25)
+  text-shadow 0 -1px 0 rgba(0,0,0,0.25)
   background-color #2b4b90
   *background-color #133783
   background-image -moz-linear-gradient(top, #3b5998, #133783)
@@ -131,8 +129,7 @@ hr
   background-image linear-gradient(to bottom, #3b5998, #133783)
   background-repeat repeat-x
   border-color #133783 #133783 #091b40
-  border-color rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
-  
+  border-color rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25)
 
 .btn-facebook:hover,
 .btn-facebook:focus,
@@ -140,59 +137,63 @@ hr
 .btn-facebook.active,
 .btn-facebook.disabled,
 .btn-facebook[disabled]
-  color #ffffff
+  color #fff
   background-color #133783 !important
   *background-color #102e6d !important
 
 .btn-facebook:active,
 .btn-facebook.active
-  background-color #0d2456 \9 !important
+  background-color #0d2456 9 !important
 
 .navbar
-  background-color #24ADBF
+  background-color #24adbf
 
 .rounded-corners
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius 5px
+  -moz-border-radius 5px
+  border-radius 5px
 
-.profilePic {
-  background-color: #E8E8EE;
-  border: 4px solid #fff;
-  
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  height: 160px;
-  width: 160px;
-}
-.profilePicSelector {
-  position: relative;
-  top: -54px;
-  left: 4px;
-  width: 152px;
-  height: 50px;
-  
+.profilePic
+  background-color #e8e8ee
+  border 4px solid #fff
+  -webkit-border-radius 2px
+  -moz-border-radius 2px
+  border-radius 2px
+  height 160px
+  width 160px
 
-}
-.profilePicSelector i {
-  color: #fff;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
+.profilePicSelector
+  position relative
+  top -54px
+  left 4px
+  width 152px
+  height 50px
+  i
+    color #fff
+    position absolute
+    top 10px
+    left 10px
+  &:hover
+    background #000
+    opacity 0
+    opacity 0.8
+    i
+      -webkit-transform scale(1.25)
+      -webkit-transition top 1s ease-out
 
-.profilePicSelector:hover {
- 
-  background: black;
-  opacity: 0;
-  opacity: .8;
-}
+.login-section
+  position absolute
+  height 100%
+  width 400px
+  top 0
+  left 55%
 
-.profilePicSelector:hover i{
-   
-   -webkit-transform: scale(1.25);
-   -webkit-transition: top 1s ease-out;
-  
-}
+.social-login
+  text-align center
+
+.tla-form-input
+  color #fff
+  background-image none
+  border 1px solid #fff
+  background-color rgba(0,0,0,0.1)
 

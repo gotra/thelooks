@@ -1,32 +1,60 @@
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    meta(content='IE=edge', http-equiv='X-UA-Compatible')
-    meta(content='width=device-width, initial-scale=1', name='viewport')
-    title= 'the looks'
-    link(href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", rel="stylesheet")
-    link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel="stylesheet")
-    link(href='/stylesheets/style.css', rel='stylesheet')
-    <!--[if lt IE 9 ]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+extends baselayout
+
+block content
   body
     .welcome.with-background
-      ul.list-inline
-        li: a.btn-social.btn-outline.fb(href='#'): i.fa.fa-fw.fa-facebook
-        li: a.btn-social.btn-outline.google(href='#'): i.fa.fa-fw.fa-google-plus
-        li: a.btn-social.btn-outline.tw(href='#'): i.fa.fa-fw.fa-twitter
-        li: a.btn-social.btn-outline.google(href='#'): i.fa.fa-fw.fa-youtube
+      
       .text-vertical-bottom
-       
-        a.btn.btn-light.btn-lg(href='/home') Find Out More
+        a.btn(href='#'): img(src='images/android_app.png')
+        a.btn(href='#'): img(src='images/apple_app.png')
 
-    aside.call-to-action
-      .container
-        .row
-          .col-lg-12.text-center
-            .h3 GET THE APP
-            a.btn(href='#'): img(src='images/android_app.png')
-            a.btn(href='#'): img(src='images/apple_app.png')
+    .login-section.transparent-background
+      panel.panel-default
+            //.panel-heading
+              h3.panel-title Sign Up!
+            .panel-body
+              .social-login
+                p USE SOCIAL SIGNUP
+                ul.list-inline
+                  li: a.btn-social.btn-outline.fb(href='#'): i.fa.fa-fw.fa-facebook
+                  li: a.btn-social.btn-outline.tw(href='#'): i.fa.fa-fw.fa-twitter
+                  li: a.btn-social.btn-outline.google(href='#'): i.fa.fa-fw.fa-google-plus
+                
+              //input.btn.btn-lg.btn-facebook.btn-block(type='submit', value='Sign Up with Facebook' onclick="fb_login();")
+              //fb:login-button(scope='public_profile,email', onlogin='checkLoginState();' data-size="medium")
+              hr.seperator-login
+              center
+                p.badge.badge-important OR
+              // Here is the tabs for login or sign up  
+              ul.nav.nav-tabs.nav-justified(role='tablist')#loginTabs
+                li.active
+                  a(role='tab', data-toggle='tab' data-target='#login') Log In
+                li
+                  a(data-target='#signup',role='tab', data-toggle='tab') Sign Up
+              .tab-content
+                .tab-pane.fade.in.active(id="login")
+                  form(accept-charset='UTF-8', role='form', method='post', action='/login')
+                    .form-group
+                      input#username.form-control.tla-form-input(type='email', name='username', placeholder='Email', autofocus)
+                    .form-group
+                      input#password.form-control.tla-form-input(type='password', name='password', placeholder='Password')
+                    input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign In')
+
+                .tab-pane.fade#signup
+                  form(accept-charset='UTF-8', role='form', method='post', action='/register')
+                    fieldset
+                      .form-group
+                        input.form-control.tla-form-input(name='fullname' id='fullname' type='text' placeholder='Name' required)
+                      .form-group
+                        input.form-control.tla-form-input(name='username' id='username' type='email' required placeholder='Email')
+                      .form-group
+                        input.form-control.tla-form-input(name='password', id='password' type='password', value='', required placeholder='Password')
+                     
+                      input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign Up with Email')
+block scripts
+  script.
+    $(document).ready(function() {
+      $('#loginTabs a:first').tab('show')
+    })                     
+
+    

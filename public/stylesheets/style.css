@@ -13,7 +13,7 @@ body {
 }
 .text-vertical-bottom {
   display: table-cell;
-  text-align: center;
+  text-align: left;
   vertical-align: bottom;
 }
 .text-vertical-bottom h1 {
@@ -61,7 +61,7 @@ hr.small {
   text-align: right;
 }
 .with-background {
-  background: url("../images/bg.jpg") no-repeat center center scroll;
+  background: url("../images/bg_new.jpg") no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -69,7 +69,7 @@ hr.small {
 }
 .transparent-background {
   background: #000 transparent;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.65);
 }
 .transparent-background p,
 .transparent-background label {
@@ -107,7 +107,7 @@ hr.small {
   line-height: 45px;
 }
 .btn-outline {
-  margin-top: 15px;
+  /*margin-top: 15px;*/
   font-size: 20px;
   color: #fff;
 }
@@ -178,11 +178,47 @@ hr.small {
   left: 10px;
 }
 .profilePicSelector:hover {
-  -webkit-transition: top 1s ease-out;
   background: #000;
   opacity: 0;
   opacity: 0.8;
 }
 .profilePicSelector:hover i {
   -webkit-transform: scale(1.25);
+  -webkit-transition: top 1s ease-out;
+}
+.login-section {
+  position: absolute;
+  height: 100%;
+  width: 400px;
+  top: 0;
+  left: 55%;
+}
+.social-login {
+  text-align: center;
+}
+.tla-form-input {
+  color: #fff;
+  background-image: none;
+  border: 1px solid #fff;
+  background-color: rgba(0,0,0,0.1);
+}
+.seperator-login {
+  margin-top: 15px;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
+    
+    background: transparent;
+} 
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
 }
