@@ -15,8 +15,8 @@ block content
             .panel-body
               .social-login
                 p USE SOCIAL SIGNUP
-                ul.list-inline
-                  li: a.btn-social.btn-outline.fb(href='#'): i.fa.fa-fw.fa-facebook
+                ul.list-inline 
+                  li: a.btn-social.btn-outline.fb(onclick="fb_login();"): i.fa.fa-fw.fa-facebook
                   li: a.btn-social.btn-outline.tw(href='#'): i.fa.fa-fw.fa-twitter
                   li: a.btn-social.btn-outline.google(href='#'): i.fa.fa-fw.fa-google-plus
                 
@@ -55,6 +55,48 @@ block scripts
   script.
     $(document).ready(function() {
       $('#loginTabs a:first').tab('show')
+        $('form').bootstrapValidator({
+          feedbackIcons: {
+              valid: 'glyphicon glyphicon-ok',
+              invalid: 'glyphicon glyphicon-remove',
+              validating: 'glyphicon glyphicon-refresh'
+          },
+          fields: {
+            fullname: {
+                trigger: 'blur',
+                validators: {
+                    regexp: {
+                        regexp: /^([A-Za-z\u00C0-\u017F]*(\s))+[A-Za-z\u00C0-\u017F]*$/,
+                        message: 'The full name must have first and last name and can consist of alphabetical characters and spaces only'
+                    },
+                    notEmpty: {
+                        message: 'Name is required'
+                    }
+                }
+            },
+            username:{
+              trigger:'blur'
+            },
+            password:{
+              
+              validators: {
+                    regexp: {
+                        regexp: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,100}/,
+                        message: 'Your password must be between 8 and 100 characters, and must contain lowercase letters, uppercase letters, and numbers.'
+                    },
+                    notEmpty: {
+                        message: 'Password is required'
+                    }
+                }
+            }
+        }
+      });
+
+      $('#fullname').on('blur',function(e){
+
+        this.value = this.value.toTitleCase();
+
+        });
     })                     
 
     

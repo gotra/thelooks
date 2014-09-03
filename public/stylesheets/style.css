@@ -107,7 +107,6 @@ hr.small {
   line-height: 45px;
 }
 .btn-outline {
-  /*margin-top: 15px;*/
   font-size: 20px;
   color: #fff;
 }
@@ -207,18 +206,15 @@ hr.small {
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus{
-    
-    background: transparent;
-} 
-
-.tab-content {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
+.nav-tabs > li.active > a:focus {
+  background: transparent;
 }
-
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
 .nav-tabs {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
