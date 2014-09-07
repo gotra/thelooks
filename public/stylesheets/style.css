@@ -5,7 +5,7 @@ body {
 }
 body {
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #edf0f5;
+  background-color: #eee;
 }
 .body-with-navbar {
   padding-top: 50px;
@@ -71,7 +71,6 @@ hr.small {
   background: #000 transparent;
   background: rgba(0,0,0,0.65);
 }
-.transparent-background p,
 .transparent-background label {
   color: #fff;
 }
@@ -116,35 +115,6 @@ hr.small {
 .white {
   color: #000;
   background-color: #fff;
-}
-.btn-facebook {
-  color: #fff;
-  -webkit-text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
-  background-color: #2b4b90;
-  *background-color: #133783;
-  background-image: -moz-linear-gradient(top, #3b5998, #133783);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b5998), to(#133783));
-  background-image: -webkit-linear-gradient(top, #3b5998, #133783);
-  background-image: -o-linear-gradient(top, #3b5998, #133783);
-  background-image: linear-gradient(to bottom, #3b5998, #133783);
-  background-repeat: repeat-x;
-  border-color: #133783 #133783 #091b40;
-  border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
-}
-.btn-facebook:hover,
-.btn-facebook:focus,
-.btn-facebook:active,
-.btn-facebook.active,
-.btn-facebook.disabled,
-.btn-facebook[disabled] {
-  color: #fff;
-  background-color: #133783 !important;
-  *background-color: #102e6d !important;
-}
-.btn-facebook:active,
-.btn-facebook.active {
-  background-color: #0d2456 9 !important;
 }
 .navbar {
   background-color: #24adbf;
@@ -217,4 +187,59 @@ hr.small {
 }
 .nav-tabs {
   margin-bottom: 0;
+}
+.fixed-top-header {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  -webkit-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  border-radius: 0;
+  top: 0;
+  border-width: 0 0 1px;
+  background-color: #12c1dc;
+  height: 100px;
+}
+.row1 {
+  background-color: #12c1dc;
+  height: 30%;
+}
+.row2 {
+  background-color: #1f2024;
+  height: 70%;
+}
+.row2 > img {
+  padding-left: 100px;
+}
+.main-viewport {
+  margin-top: 110px;
+}
+.looks-wrapper {
+  background-color: #fdfeff;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  width: 300px;
+}
+.looks-info,
+.looks-plus,
+.looks-social {
+  padding: 10px 12px;
+  width: 100%;
+}
+.looks-info,
+.looks-plus {
+  display: table;
+  table-layout: fixed;
+}
+.looks-action-icons {
+  display: table-cell;
+  text-align: center;
+}
+.looks-plus,
+.looks-social {
+  border-top: 1px solid #e7e7e7;
+}
+.looks-social > span > i {
+  padding-left: 20px;
 }

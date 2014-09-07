@@ -1,38 +1,12 @@
 extends baselayout
 
 block content
-  body.body-with-navbar
-    .navbar.navbar-fixed-top(role="navigation")
-      .container-fluid
-        .navbar-header
-          button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          p.navbar-brand.title-text the looks
-        .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li: a(href="#") HOME
-            li: a(href="#") HAIRSTYLE
-            li: a(href="#") HAIRTAG
-            li: a(href="#") LOOKS BOX
-          if user
-            .navbar-right.navbar-form
-              label.title-text Hi #{user.givenName}
-              a.btn.btn-danger.btn-sm(href="/logout") Logout
-          else
-            form.navbar-form.navbar-right(role="form" method="post" action="/login")
-              .form-group
-                .input-group
-                  input.input-sm.rounded-corners(type="email" placeholder="Email" class="form-control" name="username")
-              .form-group
-                .input-group
-                  input.input-sm.rounded-corners(type="password" placeholder="Password" class="form-control" name="password")
-              button.btn.btn-success(type="submit") Login
-    ol.breadcrumb
-      li: a(href="#") HOME
-      li: a.active(href="#") LOOKS BOX
+  body
+    .fixed-top-header
+      .row1
+      .row2
+        img(src="images/logo-small.png",alt="The Looks" , width="auto", height="100%")
+
 
     block body
 

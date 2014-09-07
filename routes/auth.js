@@ -41,11 +41,15 @@ router.post('/register', function(req, res) {
 
   // Grab user fields.
   if (!firstname || !lastname) {
-    return res.render('register', {title: 'Register', error: 'Firstname and lastname required.'});
+    req.flash('error','Firstname and lastname required.');
+    req.flash('title','Sign Up');
+    return res.redirect('/');
   }
 
   if (!username || !password) {
-    return res.render('register', {title: 'Register', error: 'Email and password required.'});
+    req.flash('error','Email and password required.');
+    req.flash('title','Sign Up');
+    return res.redirect('/');
   }
 
   // Initialize our Stormpath client.
@@ -67,7 +71,9 @@ router.post('/register', function(req, res) {
       password: password,
     }, function (err, createdAccount) {
       if (err) {
-        return res.render('register', {title: 'Register', error: err.userMessage});
+        req.flash('error',err.userMessage);
+        req.flash('title','Sign Up');
+        return res.redirect('/');
       } else {
         passport.authenticate('stormpath')(req, res, function () {
           return res.redirect('/dashboard');
@@ -81,9 +87,15 @@ router.post('/register', function(req, res) {
 
 // Render the login page.
 router.get('/login', function(req, res) {
-  res.render('login', {title: 'Login', error: req.flash('error')[0]});
+  res.render('login', {title: 'Log In', error: req.flash('error')[0]});
 });
 
+// Render the home page.
+router.get('/', function(req, res) {
+  var _title = req.flash('title')[0]?req.flash('title')[0]:'Log In';
+  console.log(_title);
+  res.render('welcome', {title: _title, error: req.flash('error')[0]});
+});
 
 // Authenticate a user.
 router.post(
@@ -92,7 +104,7 @@ router.post(
     'stormpath',
     {
       successRedirect: '/dashboard',
-      failureRedirect: '/login',
+      failureRedirect: '/',
       failureFlash: 'Invalid email or password.',
     }
   )

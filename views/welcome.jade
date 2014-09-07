@@ -23,8 +23,8 @@ block content
               //input.btn.btn-lg.btn-facebook.btn-block(type='submit', value='Sign Up with Facebook' onclick="fb_login();")
               //fb:login-button(scope='public_profile,email', onlogin='checkLoginState();' data-size="medium")
               hr.seperator-login
-              center
-                p.badge.badge-important OR
+              //center
+                //p.badge.badge-important OR
               // Here is the tabs for login or sign up  
               ul.nav.nav-tabs.nav-justified(role='tablist')#loginTabs
                 li.active
@@ -32,6 +32,11 @@ block content
                 li
                   a(data-target='#signup',role='tab', data-toggle='tab') Sign Up
               .tab-content
+                if error
+                  .alert.alert-dismissable.alert-danger.login-fail
+                    button.close(type='button', data-dismiss='alert') &times;
+                    p.
+                      #{error}
                 .tab-pane.fade.in.active(id="login")
                   form(accept-charset='UTF-8', role='form', method='post', action='/login')
                     .form-group
@@ -41,7 +46,7 @@ block content
                     input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign In')
 
                 .tab-pane.fade#signup
-                  form(accept-charset='UTF-8', role='form', method='post', action='/register')
+                  form#register(accept-charset='UTF-8', role='form', method='post', action='/register')
                     fieldset
                       .form-group
                         input.form-control.tla-form-input(name='fullname' id='fullname' type='text' placeholder='Name' required)
@@ -54,47 +59,56 @@ block content
 block scripts
   script.
     $(document).ready(function() {
-      $('#loginTabs a:first').tab('show')
-        $('form').bootstrapValidator({
-          feedbackIcons: {
-              valid: 'glyphicon glyphicon-ok',
-              invalid: 'glyphicon glyphicon-remove',
-              validating: 'glyphicon glyphicon-refresh'
-          },
-          fields: {
-            fullname: {
-                trigger: 'blur',
-                validators: {
-                    regexp: {
-                        regexp: /^([A-Za-z\u00C0-\u017F]*(\s))+[A-Za-z\u00C0-\u017F]*$/,
-                        message: 'The full name must have first and last name and can consist of alphabetical characters and spaces only'
-                    },
-                    notEmpty: {
-                        message: 'Name is required'
-                    }
-                }
-            },
-            username:{
-              trigger:'blur'
-            },
-            password:{
-              
+      
+      var _view = '#{title}';
+      if (_view == 'Log In') {
+        $('#loginTabs a:first').tab('show');
+      }
+      else {
+         $('#loginTabs a:last').tab('show');
+      } 
+
+
+      $('#register').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+          fullname: {
+              trigger: 'blur',
               validators: {
-                    regexp: {
-                        regexp: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,100}/,
-                        message: 'Your password must be between 8 and 100 characters, and must contain lowercase letters, uppercase letters, and numbers.'
-                    },
-                    notEmpty: {
-                        message: 'Password is required'
-                    }
-                }
-            }
-        }
-      });
+                  regexp: {
+                      regexp: /^([A-Za-z\u00C0-\u017F]*(\s))+[A-Za-z\u00C0-\u017F]*$/,
+                      message: 'The full name must have first and last name and can consist of alphabetical characters and spaces only'
+                  },
+                  notEmpty: {
+                      message: 'Name is required'
+                  }
+              }
+          },
+          username:{
+            trigger:'blur'
+          },
+          password:{
+            
+            validators: {
+                  regexp: {
+                      regexp: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,100}/,
+                      message: 'Your password must be between 8 and 100 characters, and must contain lowercase letters, uppercase letters, and numbers.'
+                  },
+                  notEmpty: {
+                      message: 'Password is required'
+                  }
+              }
+          }
+      }
+    });
 
-      $('#fullname').on('blur',function(e){
+    $('#fullname').on('blur',function(e){
 
-        this.value = this.value.toTitleCase();
+      this.value = this.value.toTitleCase();
 
         });
     })                     

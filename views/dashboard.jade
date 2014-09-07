@@ -2,12 +2,21 @@ extends layout
 
 block body
 
-  .dashboard
-    .row
-      .col-lg-12
-        .jumbotron
-          h1 My looks
-          br
-          br
-          p Welcome to your look #{user.fullName}!
-            
+	.main-viewport
+		if images
+			div#lookscontainer.js-masonry(data-masonry-options='{"columnWidth": 200, "itemSelector": ".item"}')
+				each val in images
+					.item
+						.looks-wrapper.rounded-corners
+							img(src='images/uploads/#{val.imagename}',alt="The Looks" , width="100%", height="auto")
+							.looks-info
+								span.looks-action-icons: i.fa.fa-star.fa-lg
+								span.looks-action-icons: i.fa.fa-link.fa-lg
+								span.looks-action-icons: i.fa.fa-scissors.fa-lg
+								span.looks-action-icons: i.fa.fa-thumbs-up.fa-lg
+							.looks-plus
+								span.looks-action-icons
+									i.fa.fa-plus-circle.fa-lg
+							.looks-social
+								span: i.fa.fa-thumbs-up
+								span: i.fa.fa-eye

@@ -17,10 +17,7 @@ cloudinary.config({
 
 
 
-// Render the home page.
-router.get('/', function(req, res) {
-  res.render('welcome', {title: 'Home', user: req.user});
-});
+
 
 // Render the home page.
 router.get('/home', function(req, res) {
@@ -31,12 +28,22 @@ router.get('/home', function(req, res) {
 
 // Render the dashboard page.
 router.get('/dashboard', function (req, res) {
-  if (!req.user || req.user.status !== 'ENABLED') {
+  /* if (!req.user || req.user.status !== 'ENABLED') {
     return res.redirect('/');
-  }
+  } */
+
+  //todo to retrieve images from backend, then point to cloudinary database
+  var imageObjectArray = [{imagename:'A-1.jpg'},
+    {imagename:'A-2.jpg'},
+    {imagename:'A-3.jpg'},
+    {imagename:'A-4.jpg'},
+    {imagename:'A-5.jpg'},
+    {imagename:'A-7.jpg'},
+  ];
+
   
 
-  res.render('dashboard', {title: 'Dashboard', user: req.user});
+  res.render('dashboard', {title: 'Dashboard', user: req.user, images: imageObjectArray});
 });
 
 
