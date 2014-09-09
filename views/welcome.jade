@@ -20,12 +20,8 @@ block content
                   li: a.btn-social.btn-outline.tw(href='#'): i.fa.fa-fw.fa-twitter
                   li: a.btn-social.btn-outline.google(href='#'): i.fa.fa-fw.fa-google-plus
                 
-              //input.btn.btn-lg.btn-facebook.btn-block(type='submit', value='Sign Up with Facebook' onclick="fb_login();")
-              //fb:login-button(scope='public_profile,email', onlogin='checkLoginState();' data-size="medium")
               hr.seperator-login
-              //center
-                //p.badge.badge-important OR
-              // Here is the tabs for login or sign up  
+
               ul.nav.nav-tabs.nav-justified(role='tablist')#loginTabs
                 li.active
                   a(role='tab', data-toggle='tab' data-target='#login') Log In
@@ -54,8 +50,15 @@ block content
                         input.form-control.tla-form-input(name='username' id='username' type='email' required placeholder='Email')
                       .form-group
                         input.form-control.tla-form-input(name='password', id='password' type='password', value='', required placeholder='Password')
+
+                      .disclaimer
+                        small By clicking the "Sign Up", you agree to the Looks
+                          br
+                          a(href='#')  Terms of Service
+                        small  and 
+                          a(href='#') Privacy Policy
                      
-                      input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign Up with Email')
+                      input.btn.btn-lg.btn-success.btn-block(type='submit', value='Sign Up')
 block scripts
   script.
     $(document).ready(function() {

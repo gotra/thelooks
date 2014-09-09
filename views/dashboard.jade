@@ -3,6 +3,34 @@ extends layout
 block body
 
 	.main-viewport
+		div.looks-selector.item
+			.looks-selector-header
+				p FIND YOUR LOOK
+			div
+				input(type='radio' name='gender' value='woman')
+				span Woman
+				input(type='radio' name='gender' value='man')
+				span Man
+			div
+				select#haircolor(style='width:256px')
+					option
+					option(value="PLATINE") PLATINE
+					option(value="BLOND") BLOND
+					option(value="BROWN") BROWN
+					option(value="BLACK") BLACK
+			div
+				select#hairstyle(style='width:256px')
+					option
+					option(value="MODERN") MODERN
+					option(value="AVANTGRADE") AVANT GRADE
+			div
+				select#hairlength(style='width:256px')
+					option
+					option(value="SHORT") SHORT
+					option(value="LONG") LONG
+			
+
+			
 		if images
 			div#lookscontainer.js-masonry(data-masonry-options='{"columnWidth": 200, "itemSelector": ".item"}')
 				each val in images
@@ -20,3 +48,25 @@ block body
 							.looks-social
 								span: i.fa.fa-thumbs-up
 								span: i.fa.fa-eye
+block scripts
+	script.
+		$(document).ready(function() {
+			$("#haircolor").select2({
+				placeholder: "Choose Color",
+				allowClear: true,
+				minimumResultsForSearch: -1
+				}); 
+
+			$("#hairstyle").select2({
+				placeholder: "Choose Style",
+				allowClear: true,
+				minimumResultsForSearch: -1
+				}); 
+
+			$("#hairlength").select2({
+				placeholder: "Choose Length",
+				allowClear: true,
+				minimumResultsForSearch: -1
+				}); 
+			
+		});

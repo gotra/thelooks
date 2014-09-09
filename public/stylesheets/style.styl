@@ -5,7 +5,7 @@ body
 
 body
   font-family "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif
-  background-color #eeeeee
+  background-color #eee
 
 .body-with-navbar
   padding-top 50px
@@ -108,6 +108,11 @@ hr
 
 .disclaimer
   text-align center
+  color white
+  margin-bottom 10px
+  a
+    color cyan
+    text-decoration underline
 
 .white
   color #000
@@ -154,10 +159,11 @@ hr
   height 100%
   width 400px
   top 0
-  left 55%
+  right 0
 
 .social-login
   text-align center
+  color #fff
 
 .tla-form-input
   color #fff
@@ -187,9 +193,9 @@ hr
   right 0
   left 0
   z-index 1030
-  -webkit-transform translate3d(0,0,0)
-  -o-transform translate3d(0,0,0)
-  transform translate3d(0,0,0)
+  -webkit-transform translate3d(0, 0, 0)
+  -o-transform translate3d(0, 0, 0)
+  transform translate3d(0, 0, 0)
   border-radius 0
   top 0
   border-width 0 0 1px
@@ -211,14 +217,17 @@ hr
 
 .looks-wrapper
   background-color #fdfeff
-  box-shadow 0 1px 2px 0 rgba(0, 0, 0, 0.22)
-  width 300px
+  box-shadow 0 1px 2px 0 rgba(0,0,0,0.22)
+  width 253px
 
-.looks-info, .looks-plus, .looks-social
+.looks-info,
+.looks-plus,
+.looks-social
   padding 10px 12px
   width 100%
 
-.looks-info, .looks-plus
+.looks-info,
+.looks-plus
   display table
   table-layout fixed
 
@@ -226,11 +235,15 @@ hr
   display table-cell
   text-align center
 
-.looks-plus, .looks-social
+.looks-plus,
+.looks-social
   border-top 1px solid #e7e7e7
 
 .looks-social
   & > span
     & > i
       padding-left 20px
+
+.item
+  margin-bottom 20px
 

@@ -111,6 +111,12 @@ hr.small {
 }
 .disclaimer {
   text-align: center;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.disclaimer a {
+  color: #0ff;
+  text-decoration: underline;
 }
 .white {
   color: #000;
@@ -155,15 +161,26 @@ hr.small {
   -webkit-transform: scale(1.25);
   -webkit-transition: top 1s ease-out;
 }
+
 .login-section {
   position: absolute;
   height: 100%;
   width: 400px;
   top: 0;
-  left: 55%;
+  right: 0;
+}
+@media (max-width:640px) {
+  .login-section {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+}
 }
 .social-login {
   text-align: center;
+  color: #fff;
 }
 .tla-form-input {
   color: #fff;
@@ -199,18 +216,11 @@ hr.small {
   border-radius: 0;
   top: 0;
   border-width: 0 0 1px;
-  background-color: #12c1dc;
+  background-color: #1f2024;
   height: 100px;
 }
-.row1 {
-  background-color: #12c1dc;
-  height: 30%;
-}
-.row2 {
-  background-color: #1f2024;
-  height: 70%;
-}
-.row2 > img {
+
+.fixed-top-header > img {
   padding-left: 100px;
 }
 .main-viewport {
@@ -219,7 +229,7 @@ hr.small {
 .looks-wrapper {
   background-color: #fdfeff;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
-  width: 300px;
+  width: 253px;
 }
 .looks-info,
 .looks-plus,
@@ -242,4 +252,7 @@ hr.small {
 }
 .looks-social > span > i {
   padding-left: 20px;
+}
+.item {
+  margin-bottom: 20px;
 }
