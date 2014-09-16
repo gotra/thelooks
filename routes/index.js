@@ -4,8 +4,9 @@ var router = express.Router();
 var util = require('util');
 var cloudinary = require('cloudinary');
 var fs = require('fs');
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var ProUser = require('./../models/prouser');
+//var ProAlbum = require('./../models/proalbum');
 var crypto =  require('crypto');
 var querystring = require('querystring');
 
@@ -22,6 +23,11 @@ cloudinary.config({
 // Render the home page.
 router.get('/home', function(req, res) {
   res.render('index', {title: 'Home', user: req.user});
+});
+
+// Render the home page.
+router.get('/test', function(req, res) {
+  res.render('test', {title: 'Home', user: req.user});
 });
 
 
@@ -68,7 +74,7 @@ router.get('/image/signature', function(req,res){
   res.json({"timestamp": _ts, "api_key": '726719321665415'  , "signature": _signature});
 });
 
-
+//TODO to be remoed
 
 router.get('/pro/new', function(req,res) {
   res.render('prouser', {title: 'Professional', user: req.user, prouser: new ProUser()});
@@ -137,6 +143,10 @@ router.route('/prouser/:prouserid')
   });
 
 });
+
+// ------- End to be removed
+
+
 
 
 router.post('/upload', function(req,res) {

@@ -3,7 +3,7 @@ extends layout
 block body
 
 	.main-viewport
-		div.looks-selector.item
+		div.looks-selector
 			.looks-selector-header
 				p FIND YOUR LOOK
 			div
@@ -12,19 +12,20 @@ block body
 				input(type='radio' name='gender' value='man')
 				span Man
 			div
-				select#haircolor.input-large
+				select.select.select-info.mrs.mbm(data-toggle="select")
 					option
 					option(value="PLATINE") PLATINE
 					option(value="BLOND") BLOND
 					option(value="BROWN") BROWN
 					option(value="BLACK") BLACK
-			div
-				select#hairstyle(style='width:256px')
+
+			//div
+				select#hairstyle.input-large
 					option
 					option(value="MODERN") MODERN
 					option(value="AVANTGRADE") AVANT GRADE
-			div
-				select#hairlength(style='width:256px')
+			//div
+				select#hairlength.input-large
 					option
 					option(value="SHORT") SHORT
 					option(value="LONG") LONG
@@ -32,7 +33,7 @@ block body
 
 			
 		if images
-			div#lookscontainer.js-masonry(data-masonry-options='{"columnWidth": 200, "itemSelector": ".item"}')
+			div#lookscontainer.js-masonry.col-md-8(data-masonry-options='{"columnWidth": 253, "itemSelector": ".item", "gutter": 25}')
 				each val in images
 					.item
 						.looks-wrapper.rounded-corners
@@ -48,25 +49,13 @@ block body
 							.looks-social
 								span: i.fa.fa-thumbs-up
 								span: i.fa.fa-eye
+		
 block scripts
 	script.
 		$(document).ready(function() {
-			$("#haircolor").select2({
-				placeholder: "Choose Color",
-				allowClear: true,
-				minimumResultsForSearch: -1
-				}); 
+		
+		
 
-			$("#hairstyle").select2({
-				placeholder: "Choose Style",
-				allowClear: true,
-				minimumResultsForSearch: -1
-				}); 
-
-			$("#hairlength").select2({
-				placeholder: "Choose Length",
-				allowClear: true,
-				minimumResultsForSearch: -1
-				}); 
+				
 			
-		});
+		}); 

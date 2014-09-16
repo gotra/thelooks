@@ -17,9 +17,10 @@ var flash = require('connect-flash');
 var mongoose = require('mongoose');
 
 
+// Get all the routes in
 var index_routes = require('./routes/index');
 var auth_routes = require('./routes/auth');
-
+var proAlbum_routes = require('./routes/proalbum');
 
 
 
@@ -167,6 +168,7 @@ self.app.set('views', path.join(__dirname, 'views'));
 
 self.app.use('/', auth_routes);
 self.app.use('/', index_routes);
+self.app.use('/', proAlbum_routes);
 
 //establish connection to mongoose
 console.log(self.mongo_connection_string);
