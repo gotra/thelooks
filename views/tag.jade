@@ -1,0 +1,54 @@
+extends layout
+
+block body
+
+
+	div.looks-selector
+		.looks-selector-header TAG
+		div
+			input(type='radio' name='gender' value='woman')
+			span Woman
+			input(type='radio' name='gender' value='man')
+			span Man
+		div
+			select.select.select-info.mrs.mbm(data-toggle="select")
+				option
+				option(value="PLATINE") PLATINE
+				option(value="BLOND") BLOND
+				option(value="BROWN") BROWN
+				option(value="BLACK") BLACK
+
+		//div
+			select#hairstyle.input-large
+				option
+				option(value="MODERN") MODERN
+				option(value="AVANTGRADE") AVANT GRADE
+		//div
+			select#hairlength.input-large
+				option
+				option(value="SHORT") SHORT
+				option(value="LONG") LONG
+		div
+			a.btn.btn-primary(href='/admin') Admin Function		
+
+		
+
+		
+	if images
+		div.looks-container.js-masonry.col-md-8(data-masonry-options='{"columnWidth": 253, "itemSelector": ".item", "gutter": 25}')
+			each val in images
+				.item
+					.looks-wrapper.rounded-corners
+						img(src='https://res.cloudinary.com/www-thelooks-net/image/upload/#{val.imageId}',alt="The Looks" , width="100%", height="auto")
+						.looks-plus
+							span.looks-action-icons
+								i.fa.fa-plus-circle.fa-lg
+		
+block scripts
+	script.
+		$(document).ready(function() {
+		
+		
+				
+			
+		}); 

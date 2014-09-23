@@ -52,7 +52,7 @@ var SampleApp = function() {
         self.tmpfolder = process.env.OPENSHIFT_DATA_DIR + '/tmp' || './tmp';
 
         // default to a 'localhost' configuration:
-        self.mongo_connection_string = 'admin:'+ process.env.MONGO_PWD +'@127.0.0.1:27017/thelooks';
+        self.mongo_connection_string = '127.0.0.1:27017/thelooks';
 
         // if OPENSHIFT env variables are present, use the available connection info:
         if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){

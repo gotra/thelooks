@@ -30,7 +30,7 @@ router.route('/proalbum')
 
 router.route('/proalbum/:proalbumentryid')
 .get(function(req,res){
-  ProAlbum.findById(req.params.proalbumentryid,function(err,proAlbumEntry){callbackFind(err,proAlbumEntry,res)});
+  ProAlbum.findById(req.params.proalbumentryid,function(err,proAlbumEntry){callbackFind(err,proAlbumEntry,res);});
 })
 .put(function(req,res){
   ProAlbum.findById(req.params.proalbumentryid,function(err,proAlbumEntry){
@@ -85,10 +85,19 @@ var parseRequest = function(req,proAlbumEntry) {
       if (hairStyle) proAlbumEntry.hairStyle = hairStyle;
       if (hairLength) proAlbumEntry.hairLength = hairLength;
       if (imageId) proAlbumEntry.imageId = imageId;
+      var tagged = gender && hairColor && hairLength && hairStyle;
+      if (tagged) {
+        proAlbumEntry.tagged = true;
+      }
+      else {
+        proAlbumEntry.tagged = false;
+      }
+      
+      
 
 };
 
-var callbackSaveOrUpdate = function(err,res,entry) { 
+var callbackSaveOrUpdate = function(err,res,entry) {
   if (err) {
     if (err.name == 'ValidationError') {
       res.status(400);

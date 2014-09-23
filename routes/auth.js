@@ -4,10 +4,6 @@ var passport = require('passport');
 var stormpath = require('stormpath');
 
 
-// Render the registration page.
-router.get('/register', function(req, res) {
-  res.render('register', {title: 'Register',error: req.flash('error')[0]});
-});
 
 //Register a new  user via social login
 router.post('/socialsignup',function(req,res){
@@ -85,15 +81,10 @@ router.post('/register', function(req, res) {
 });
 
 
-// Render the login page.
-router.get('/login', function(req, res) {
-  res.render('login', {title: 'Log In', error: req.flash('error')[0]});
-});
 
 // Render the home page.
 router.get('/', function(req, res) {
   var _title = req.flash('title')[0]?req.flash('title')[0]:'Log In';
-  console.log(_title);
   res.render('welcome', {title: _title, error: req.flash('error')[0]});
 });
 

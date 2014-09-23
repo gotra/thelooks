@@ -1,13 +1,10 @@
 extends layout
 
 block body
-	.dashboard
-		.row
-			.col-lg-12
-				.jumbotron
-					h1 My looks
-					p Welcome to your look
-					form#my-awesome-dropzone.dropzone(action='/upload')
+	.main-viewport
+		h3 Upload pictures
+		form#my-awesome-dropzone.dropzone(action='/upload')
+			<div class="dz-message" data-dz-message><span>Your Custom Message</span></div>
 block scripts
 	script.
 		Dropzone.autoDiscover = false;
@@ -22,24 +19,20 @@ block scripts
 			var myDropzone = new Dropzone("#my-awesome-dropzone",{
 				url: 'https://api.cloudinary.com/v1_1/www-thelooks-net/image/upload'
 				});
-			var t1,t2;
+			
 			myDropzone.on("sending", function(file,xhr,formData) {
-				console.log(file);
-				if (!t1) {
-					t1 = new Date().getTime();
-
-
-				}
-
+				
 				formData.append("timestamp", cloudinarySignature.timestamp); // Will send the filesize along with the file as POST data.
 				formData.append("api_key", cloudinarySignature.api_key);
 				formData.append("signature", cloudinarySignature.signature);
 			});
+			myDropzone.on("success",function(file,res){
+				var data = {imageId: res.public_id + '.' + res.format}
+				$.post("proalbum",data,function(r){
+						// successfully posted the image to database
+					});
 
-			myDropzone.on("queuecomplete", function() {
-				
-					t2 = new Date().getTime();
-					
-					console.log((t2-t1)/1000);
-			});
+				});
+
+			
 		})

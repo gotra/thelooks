@@ -4,9 +4,8 @@ var router = express.Router();
 var util = require('util');
 var cloudinary = require('cloudinary');
 var fs = require('fs');
-//var mongoose = require('mongoose');
 var ProUser = require('./../models/prouser');
-//var ProAlbum = require('./../models/proalbum');
+var ProAlbum = require('./../models/proalbum');
 var crypto =  require('crypto');
 var querystring = require('querystring');
 
@@ -38,6 +37,7 @@ router.get('/dashboard', function (req, res) {
     return res.redirect('/');
   } */
 
+
   //todo to retrieve images from backend, then point to cloudinary database
   var imageObjectArray = [{imagename:'A-1.jpg'},
     {imagename:'A-2.jpg'},
@@ -53,7 +53,27 @@ router.get('/dashboard', function (req, res) {
 });
 
 
-// Render the upload test  page
+// the administrator page
+router.get('/admin', function(req, res) {
+  res.render('admin', {title: 'Administrate', user: req.user});
+});
+
+// the admindtration tag page
+router.get('/tag', function(req, res) {
+ 
+  ProAlbum.find(function(err,proAlbumEntries){
+    if (err) {
+      console.log(err);
+
+    }
+   
+    res.render('tag', {title: 'Administrate', user: req.user, images: proAlbumEntries});
+
+  });
+  
+});
+
+// Render the upload page
 router.get('/upload', function(req, res) {
 	res.render('uploaddropzone', {title: 'Uploads', user: req.user});
 });
