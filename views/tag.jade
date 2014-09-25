@@ -48,7 +48,33 @@ block scripts
 	script.
 		$(document).ready(function() {
 		
+		$('.looks-wrapper').click(function(event) {
+			console.log(event,this);
+			bootbox.dialog({
+				title: 'Tag Image',
+				message: '<div class="row">  ' +
+				'<div class="col-md-24"> ' +
+				'<div class="col-md-8"> ' +
+				'<img src="'+ $(this).children('img').attr('src') + '" width="100px"/>'+
+				'</div>' +
+				'<div class="col-md-4">' +
+				'<form> ' +
+				'<div class="form-group"> ' +
+				'<div class="btn-group" data-toggle="buttons">' +
+				'<label class="btn btn-primary active">' +
+				'<input type="radio" name="options" id="option1" checked> Male </input>' +
+				'</label>' +
+				'<label class="btn btn-primary">' +
+				'<input type="radio" name="options" id="option2"> Female </input>' +
+				'</label>' +
+				'</div>' +
+				'</div>' +
+				'</form>' +
+				'</div>' +
+				'</div>'
+			});
 		
+		});
 				
 			
 		}); 
