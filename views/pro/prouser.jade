@@ -1,0 +1,70 @@
+extends ../layout
+
+block body
+	.container.looks-container
+		h1 Add a prouser
+		.col-lg-3
+			div.profilePicWrapper
+				a.profilePicContainer
+					img.profilePic
+				.profilePicSelector
+					a.picSelectorLink#uploadLink
+						i.fa.fa-camera.fa-2x
+
+		.col-lg-6
+
+			form(accept-charset='UTF-8', role='form', method='post', action='/prouser')
+				fieldset
+					.form-group
+					label.control-label(for='fullname') Full name
+					input.form-control(name='fullname' id='fullname' type='text' required value="#{prouser.firstName ? prouser.firstName:''}#{prouser.lastName ? ' ' + prouser.lastName:''}")
+				.form-group
+					label.control-label(for='email') Email
+					input.form-control(name='email' id='email' type='email' required value= prouser.emailId)
+				.form-group
+					label.control-label(for='website') Website
+					input.form-control(name='website', id='website' type='website', value='', required)
+
+				.col-lg-6
+					input.btn.btn-lg.btn-success.btn-block(type='submit', value='Add')
+				.col-lg-6
+					input.btn.btn-lg.btn-danger.btn-block(value='Cancel')
+				br
+				if error
+					.alert.alert-dismissable.alert-danger.register-fail
+						button.close(data-dismiss='alert', type='button') &times;
+						p.
+							#{error}
+block scripts
+	script.
+		Dropzone.autoDiscover = false;
+		var cloudinarySignature;
+		$.getJSON( "../image/signature", function( data ) {
+			cloudinarySignature = data ;
+			});
+		$(function() {
+		// Now that the DOM is fully loaded, create the dropzone, and setup the
+		// event listeners
+		//https://api.cloudinary.com/v1_1/www-thelooks-net/auto/upload
+			var myDropzone = new Dropzone("#uploadLink",{
+				url: 'https://api.cloudinary.com/v1_1/www-thelooks-net/image/upload'
+				});
+
+			myDropzone.on("sending", function(file,xhr,formData) {
+
+				formData.append("timestamp", cloudinarySignature.timestamp); // Will send the filesize along with the file as POST data.
+				formData.append("api_key", cloudinarySignature.api_key);
+				formData.append("signature", cloudinarySignature.signature);
+			});
+			myDropzone.on("success",function(file,res){
+				var data = {imageId: res.public_id + '.' + res.format}
+				$.post("proalbum",data,function(r){
+						// successfully posted the image to database
+					});
+
+				});
+
+
+		})
+
+

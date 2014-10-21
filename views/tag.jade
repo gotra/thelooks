@@ -3,46 +3,56 @@ extends layout
 block body
 
 
-	div.looks-selector
-		.looks-selector-header TAG
-		div
-			input(type='radio' name='gender' value='woman')
-			span Woman
-			input(type='radio' name='gender' value='man')
-			span Man
-		div
-			select.select.select-info.mrs.mbm(data-toggle="select")
-				option
-				option(value="PLATINE") PLATINE
-				option(value="BLOND") BLOND
-				option(value="BROWN") BROWN
-				option(value="BLACK") BLACK
+	div#imgcontent
+		div#imgcontainer.looks-container
+			// TO BE REMOVED IF NOT LOADING FROM BACKEND
+			if images
+				each val in images
+					div.theLooksItem
+						div.theLooks.theLooksBase.summary
+							div.theLooksWrapper
+								div.theLooksHolder
+									a.theLooksImageWrapper
+										div.hoverMask
+										if val.test
+											img.theLooksImg.fullBleed.noFade(src="#{val.imageId}" style="height:352px;width:236px;")
+										else
+											img.theLooksImg.fullBleed.noFade(src="https://res.cloudinary.com/www-thelooks-net/image/upload/#{val.imageId}" style="height:auto;width:236px;")
+							div.theLooksMeta
+								p.theLooksDescription Hi there this ia kind of the looks which you should have
+							div.theLooksCredits
+								div.theLooksCreditItem
+									a
+										img.theLooksCreditImg.user(alt="G" )
+									.theLooksCreditName Rajeev Guru
+									.theLooksCreditTitle My image isbetter than yours ...
 
-		//div
-			select#hairstyle.input-large
-				option
-				option(value="MODERN") MODERN
-				option(value="AVANTGRADE") AVANT GRADE
-		//div
-			select#hairlength.input-large
-				option
-				option(value="SHORT") SHORT
-				option(value="LONG") LONG
-		div
-			a.btn.btn-primary(href='/admin') Admin Function		
 
-		
 
-		
-	if images
-		div.looks-container.js-masonry.col-md-8(data-masonry-options='{"columnWidth": 253, "itemSelector": ".item", "gutter": 25}')
-			each val in images
-				.item
-					.looks-wrapper.rounded-corners
-						img(src='https://res.cloudinary.com/www-thelooks-net/image/upload/#{val.imageId}',alt="The Looks" , width="100%", height="auto")
-						.looks-plus
-							span.looks-action-icons
-								i.fa.fa-plus-circle.fa-lg
-		
+
+
+	script#imgtemplate(type='text/html')
+		div.theLooksItem
+			div.theLooks.theLooksBase.summary
+				div.theLooksWrapper
+					div.theLooksHolder
+						a.theLooksImageWrapper
+							div.hoverMask
+							<img class="theLooksImg fullBleed noFade" src="<%= imageId %>" style="height:352px;width:236px;"/>
+				div.theLooksMeta
+					p.theLooksDescription Hi there this ia kind of the looks which you should have
+				div.theLooksCredits
+					div.theLooksCreditItem
+						a
+							img.theLooksCreditImg.user(alt="G" )
+						.theLooksCreditName Rajeev Guru
+						.theLooksCreditTitle My image isbetter than yours ...
+
+	script#rowtemplate(type='text/html')
+		div.row
+
+
+
 block scripts
 	script(src='/javascripts/tagging.js')
+

@@ -265,3 +265,143 @@ hr.small {
   float: left;
   margin-top: 110px;
 }
+.styled-select select {
+  background: transparent;
+  width: 268px;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  border-radius: 0;
+  height: 34px;
+  -webkit-appearance: none;
+}
+.theLooksItem {
+  position: absolute;
+  margin: 14px 7px 0 7px;
+}
+.theLooks {
+  font-size: 11px;
+}
+.theLooks.summary.summary {
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  background: #fff;
+  width: 236px;
+}
+.theLooks.summary .theLooksWrapper {
+  position: relative;
+}
+.theLooks.summary .theLooksHolder {
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.theLooks.summary .theLooksImageWrapper {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+  border-radius: 6px 6px 0 0;
+  background: #eee;
+  display: block;
+  padding: 0;
+  position: relative;
+}
+.theLooks.summary .hoverMask {
+  -webkit-transition: background 0.04s linear;
+  transition: background 0.04s linear;
+  border-radius: 6px 6px 0 0;
+  box-shadow: none;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+.theLooks.summary .theLooksImg {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  opacity: 0;
+}
+.theLooks.summary .theLooksImg.fullBleed {
+  border-radius: 6px 6px 0 0;
+}
+.theLooks.summary .theLooksImg.noFade {
+  opacity: 1;
+}
+.theLooks.summary .theLooksMeta {
+  padding: 6px 14px 7px;
+}
+.theLooks.summary .theLooksMeta .theLooksDescription {
+  padding: 0;
+}
+.theLooks.summary .theLooksDescription {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+  font-size: 13px;
+  line-height: 17px;
+  word-wrap: break-word;
+}
+.theLooks.summary .theLooksCredits {
+  font-family: 'Helvetica', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', sans-serif;
+  font-weight: bold;
+  border-top: 1px solid #e7e7e7;
+  color: #777;
+}
+.theLooks.summary .theLooksCreditItem .theLooksCreditImg {
+  position: relative;
+  border-radius: 2px;
+  float: left;
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
+.theLooks.summary .theLooksCreditItem .theLooksCreditImg.user {
+  position: relative;
+  border-radius: 50%;
+}
+.theLooks.summary .theLooksCreditItem.theLooksCreditName {
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  color: #717171;
+  display: block;
+}
+.theLooks.summary .theLooksCreditItem.theLooksCreditTitle {
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  color: #b7b7b7;
+}
+.theLooksBase {
+  position: relative;
+}
+a {
+  color: #717171;
+  font-weight: bold;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  width: auto 9;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+.theLooks.summary .theLooksMeta .theLooksDescription,
+.theLooks.summary .theLooksMeta .pinAttribution,
+.theLooks.summary .theLooksMeta .pinSocialMeta {
+  margin: 5px 0;
+}
+.profilePicWrapper {
+  margin-top: 50px;
+}

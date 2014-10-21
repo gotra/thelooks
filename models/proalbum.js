@@ -32,7 +32,13 @@ var ProAlbumSchema   = new Schema({
 	hairStyle: {type:String, enum: styleList},
 	hairLength: {type:String, enum: lengthList},
 	imageId: String,
-	tagged: Boolean
+	tagged: Boolean,
+    creationDate: { type : Date, default: Date.now },
+    test: Boolean,
+    imageWidth: Number,
+    imageHeight: Number,
+    imageScaledWidth: Number,
+    imageScaledHeight: Number
 
 
 });

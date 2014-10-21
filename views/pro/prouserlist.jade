@@ -1,7 +1,7 @@
-extends layout
+extends ../layout
 
 block body
-	.container
+	.container.looks-container
 		table.table
 			thead
 				tr
@@ -12,7 +12,7 @@ block body
 			each item in prouserlist
 				tr 
 					td: a(href="/prouser/#{item.id}") #{item.firstName} #{item.lastName}
-					td #{item.website}
+					td #{item.emailId}
 					td #{item.address.line1} #{item.address.line2} #{item.address.zipcode} 	#{item.address.city}
 					
 

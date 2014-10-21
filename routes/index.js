@@ -60,16 +60,24 @@ router.get('/admin', function(req, res) {
 
 // the admindtration tag page
 router.get('/tag', function(req, res) {
+
+    var query = ProAlbum.find();
+    query.limit(50);
+
+    query.exec(function(err,proAlbumEntries){
+        if (err) {
+            console.log(err);
+
+        }
+
+        res.render('tag', {title: 'Administrate', user: req.user, images: proAlbumEntries});
+
+    });
  
-  ProAlbum.find(function(err,proAlbumEntries){
-    if (err) {
-      console.log(err);
 
-    }
-   
-    res.render('tag', {title: 'Administrate', user: req.user, images: proAlbumEntries});
+    //res.render('tag', {title: 'Administrate', user: req.user});
 
-  });
+
   
 });
 
@@ -139,7 +147,7 @@ router.route('/prouser')
      
     }
     else {
-       res.render('prouserlist', {title: 'Professional', user: req.user, prouserlist: prousers});
+       res.render('pro/prouserlist', {title: 'Professional', user: req.user, prouserlist: prousers});
     }
       
 
@@ -157,7 +165,7 @@ router.route('/prouser/:prouserid')
     }
     else {
        console.log(prouser);
-      res.render('prouser',{title: 'Professional', user: req.user, prouser: prouser});
+      res.render('pro/prouser',{title: 'Professional', user: req.user, prouser: prouser});
     }
       
   });

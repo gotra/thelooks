@@ -20,4 +20,4 @@ var ProUserSchema   = new Schema({
 });
 
 
-module.exports = mongoose.model('prouser', ProUserSchema);
+module.exports  = mongoose.model('prouser', ProUserSchema);

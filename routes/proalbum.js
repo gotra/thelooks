@@ -8,11 +8,43 @@ router.route('/proalbum')
 .post(function  (req,res) {
   var proAlbumEntry = new ProAlbum();
   parseRequest(req,proAlbumEntry);
-  // save the bear and check for errors
+  // set current date before saving the entry
+  proAlbumEntry.creationDate = Date.now();
   proAlbumEntry.save(function(err){callbackSaveOrUpdate(err,res,proAlbumEntry);});
 })
 .get(function (req,res){
-  ProAlbum.find(function(err,proAlbumEntries){
+        // retrieve some parameters from the request object
+        var tagged = req.param("tagged"),
+            pageNumber = req.param("pagenum"),
+            pageSize = req.param("pagesize"),
+            recAfterDate = req.param("afterdate");
+
+   var query = ProAlbum.find();
+        if (typeof tagged !== 'undefined') {
+            query.where('tagged').equals(tagged);
+        }
+        pageNumber = pageNumber || 1 ;
+        pageSize = pageSize || 50 ;
+
+        query.skip((pageNumber-1)*pageSize).limit(pageSize);
+
+        if (typeof recAfterDate !== 'undefined') {
+
+            //todo check for the things which do not match
+            var match = recAfterDate.match(/^(\d+)-(\d+)-(\d+)T(\d+)\:(\d+)\:(\d+).(\d+)Z$/)
+            if (match) {
+                var date = new Date(match[1], match[2] - 1, match[3], match[4], match[5], match[6], match[7])
+                query.where('creationDate').lte(date);
+            }
+
+        }
+
+
+        //todo add the date parameter to avoid performance bottleneck in production
+
+        query.sort('-creationDate');
+
+        query.exec(function(err,proAlbumEntries){
     if (err) {
       console.log(err);
       res.status(500);
@@ -92,6 +124,7 @@ var parseRequest = function(req,proAlbumEntry) {
       else {
         proAlbumEntry.tagged = false;
       }
+
       
       
 
