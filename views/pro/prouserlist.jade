@@ -11,7 +11,7 @@ block body
 			tbody
 			each item in prouserlist
 				tr 
-					td: a(href="/prouser/#{item.id}") #{item.firstName} #{item.lastName}
+					td: a(href="/pro/#{item.id}") #{item.firstName} #{item.lastName}
 					td #{item.emailId}
 					td #{item.address.line1} #{item.address.line2} #{item.address.zipcode} 	#{item.address.city}
 					

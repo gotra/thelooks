@@ -102,13 +102,13 @@ router.get('/image/signature', function(req,res){
   res.json({"timestamp": _ts, "api_key": '726719321665415'  , "signature": _signature});
 });
 
-//TODO to be remoed
+
 
 router.get('/pro/new', function(req,res) {
   res.render('prouser', {title: 'Professional', user: req.user, prouser: new ProUser()});
 });
 
-router.route('/prouser')
+router.route('/pro')
 .post(function  (req,res) {
   
     
@@ -155,7 +155,7 @@ router.route('/prouser')
 });
 
 
-router.route('/prouser/:prouserid')
+router.route('/pro/:prouserid')
 .get(function(req,res){
   ProUser.findById(req.params.prouserid,function(err,prouser){
     if (err) {
@@ -172,7 +172,6 @@ router.route('/prouser/:prouserid')
 
 });
 
-// ------- End to be removed
 
 
 

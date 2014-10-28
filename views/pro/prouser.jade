@@ -4,11 +4,11 @@ block body
 	.container.looks-container
 		h1 Add a prouser
 		.col-lg-3
-			div.profilePicWrapper
+			div.profilePicWrapper#uploadLink
 				a.profilePicContainer
 					img.profilePic
 				.profilePicSelector
-					a.picSelectorLink#uploadLink
+					a.picSelectorLink
 						i.fa.fa-camera.fa-2x
 
 		.col-lg-6
@@ -37,7 +37,7 @@ block body
 							#{error}
 block scripts
 	script.
-		Dropzone.autoDiscover = false;
+
 		var cloudinarySignature;
 		$.getJSON( "../image/signature", function( data ) {
 			cloudinarySignature = data ;
